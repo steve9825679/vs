@@ -10,6 +10,7 @@
 
     let ok = ref(false);
     let nok = ref(false);
+    let counter = ref(0);
 
     let m1 = ref(0);
     let m2 = ref(0);
@@ -42,6 +43,7 @@
 
         setTimeout(() => {
             
+            counter.value++;
             m1.value = randomIntFromInterval(1, 10);
             m2.value = current_reihe.value;
     
@@ -86,12 +88,12 @@
 
 <template>
     <div>
-        <div class="flex justify-between">
+        <div class="flex justify-around my-4 py-4 bg-amber-200">
             <div v-for="reihe in [2,3,4,5,6,7,8,9,10]" :key="`r${reihe}`">
                 <a 
                     href="#" 
                     @click.prevent="choose_reihe(reihe)"
-                    :class="{'text-pink-800 font-bold':reihe == current_reihe}"
+                    :class="{'text-amber-800 font-bold border-b-4 border-b-amber-800':reihe == current_reihe}"
                 >{{ reihe }}er - Reihe</a>
             </div>
         </div>
@@ -108,20 +110,20 @@
                 </div>
             </div>
             <div class="h-full grid self-center">
-                <div class="text-4xl text-pink-400">
-                    Das kleine 1x1 😍
+                <div class="text-2xl text-center">
+                    Runde {{ counter }}
                 </div>
-                <div class="text-4xl bg-green-700 text-white rounded-md p-3 mt-5" v-show="ok">
+                <div class="text-4xl bg-green-700 text-white rounded-md py-3 px-8" v-show="ok">
                     Suuuuuuuuper 👍
                 </div>
-                <div class="text-4xl bg-slate-700 text-white rounded-md p-3 mt-5" v-show="nok">
+                <div class="text-4xl bg-slate-700 text-white rounded-md py-3 px-8" v-show="nok">
                     Oiiiiiiii 😒
                 </div>
             </div>
             <div class="h-67 w-72 border-amber-300 border-4 rounded-lg p-2">
                 <div class="flex flex-wrap place-content-center h-full">
                     <div v-for="result in results" :key="`result${result}`">
-                        <button class="w-12 h-12 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-xl m-2 p-2" @click.prevent="check_result(result)">{{ result }}</button>
+                        <button class="w-12 h-12 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-xl m-2 p-2 hover:bg-sky-600 transition" @click.prevent="check_result(result)">{{ result }}</button>
                     </div>
                 </div>
             </div>
