@@ -8,12 +8,6 @@
         make_calculation();
     }
 
-    /**
-     * states
-     * 0 ... determine multiplicands
-     * 1 ... waiting for result
-     */
-    let state = ref(0);
     let m1 = ref(0);
     let m2 = ref(0);
     let results = ref([]);
@@ -38,8 +32,6 @@
         const r1 = parseInt(chosen_result);
         const r2 = parseInt(m1.value * m2.value);
 
-        console.log(chosen_result, r1, r2, m1.value, m2.value);
-
         if (r1 === r2) {
             alert("YES!");
             make_calculation();
@@ -53,16 +45,10 @@
 
     make_calculation();
     
-
 </script>
 
 <template>
     <div>
-        <div class="bg-rose-500 w-32 h-32">
-            abcde
-        </div>
-
-
         <div class="flex justify-between">
             <div v-for="reihe in [2,3,4,5,6,7,8,9,10]" :key="`r${reihe}`">
                 <a 
@@ -80,7 +66,7 @@
                 </div>
             </div>
             <div class="h-full grid self-center text-4xl text-pink-400">
-                Das kleine 1x1
+                Das kleine 1x1 😍
             </div>
             <div class="h-64 w-64 border-amber-300 border-4 rounded-lg p-2">
                 <div class="flex flex-wrap">
