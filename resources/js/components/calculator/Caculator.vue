@@ -42,7 +42,7 @@
 
         setTimeout(() => {
             
-            m1.value = randomIntFromInterval(0, 10);
+            m1.value = randomIntFromInterval(1, 10);
             m2.value = current_reihe.value;
     
             results.value = [];
