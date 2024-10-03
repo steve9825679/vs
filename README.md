@@ -3,6 +3,9 @@
 ## Module
 
 - Kleines 1x1 Training Training
+
+ist fertig
+  
 - Addition im 10er Raum / 20er Raum / 50er Raum / 100er Raum ohne Über/Unterschreitungen
 
 var bereich_max
@@ -12,6 +15,9 @@ Bestimmen maximaler Summand max_summand
 Summand als Zufallszahl aus 0...max_summand
   
 - Multiplikation kleines 1x1 gemischt
+
+
+  
 - Über-/Unterschreitungen im 20er Raum / 50er Raum / 100er Raum
 - 100er Feld: Ausgangszahl, 3+ Pfeile > Ergebnis
 - Division "in": Wieviel ist 3 in 12, etc im 20er RAum / 50er Raum / 100er Raum mit Zahlen von 2 bis 10
