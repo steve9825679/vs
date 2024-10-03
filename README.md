@@ -37,7 +37,6 @@ Minuend Zufallszahl zz2 so bestimmen, dass voriger Zehner unterschritten, vor-vo
 ```
   1   2   3   4   5   6   7   8   9  10
  11  12  13  14  15  16  17  18  19  20
- 21  22 ...
  ...
  91  92  93  94  95  96  97  98  99 100
 ```
@@ -46,6 +45,10 @@ Zufallszahl aus diesem Zahlenfeld
 Gesucht ist die Ergebniszahl, wenn man den Pfeilen folgt
   
 - Division "in": Wieviel ist 3 in 12, etc im 20er RAum / 50er Raum / 100er Raum mit Zahlen von 2 bis 10
+
+Wie oft geht 4 in 16?
+var bereich_max, max_multiplikand1, max_multiplikand2, evtl. Option "mit 0"
+zz1 als Zufallszahl 0/1...max_multiplikand1, zz2 dito bestimmen
 
 ## Einrichten App am Webserver
 
