@@ -2,6 +2,9 @@
 
 Eine App für
 - Kleines 1x1 Training
+- Über-/Unterschreitungen im 20er Raum / 50er Raum / 100er Raum
+- 100er Feld: Ausgangszahl, 3+ Pfeile > Ergebnis
+- Division "in": Wieviel ist 3 in 12, etc im 20er RAum / 50er Raum / 100er Raum mit Zahlen von 2 bis 10
 
 ## Einrichten App am Webserver
 
