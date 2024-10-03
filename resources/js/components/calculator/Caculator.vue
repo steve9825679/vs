@@ -99,12 +99,12 @@
         </div>
 
         <div class="flex justify-between">
-            <div class="h-64 w-64 border-amber-300 border-4 rounded-lg p-2">
+            <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-2">
                 <div class="grid place-items-center h-full">
                     <div v-if="m2 === 0" class="text-2xl">
                         Moooooment...
                     </div>
-                    <div v-else class="text-6xl">
+                    <div v-else class="text-8xl">
                         {{ m1 }} &centerdot; {{ m2 }} = 
                     </div>
                 </div>
@@ -120,10 +120,10 @@
                     Oiiiiiiii 😒
                 </div>
             </div>
-            <div class="h-67 w-72 border-amber-300 border-4 rounded-lg p-2">
+            <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-2">
                 <div class="flex flex-wrap place-content-center h-full">
                     <div v-for="result in results" :key="`result${result}`">
-                        <button class="w-12 h-12 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-xl m-2 p-2 hover:bg-sky-600 transition" @click.prevent="check_result(result)">{{ result }}</button>
+                        <button class="w-20 h-20 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-4xl m-2 p-2 hover:bg-sky-600 transition" @click.prevent="check_result(result)">{{ result }}</button>
                     </div>
                 </div>
             </div>
