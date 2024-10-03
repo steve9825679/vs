@@ -18,7 +18,12 @@ Summand als Zufallszahl aus 0...max_summand
 
 var zz1, zz2 mit zz1 und zz2 0...10
   
-- Über-/Unterschreitungen im 20er Raum / 50er Raum / 100er Raum
+- Überschreitungen im 20er Raum / 50er Raum / 100er Raum ... 
+
+var bereich_max
+Zufallszahl zz1 im gewählten Zahlenbereich 0...bereich_max-10
+Summand Zufallszahl zz2 so bestimmen, dass nächster Zehner überschritten, übernächster Zehner aber nicht überschritten wird
+
 - 100er Feld: Ausgangszahl, 3+ Pfeile > Ergebnis
 - Division "in": Wieviel ist 3 in 12, etc im 20er RAum / 50er Raum / 100er Raum mit Zahlen von 2 bis 10
 
