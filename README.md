@@ -31,6 +31,20 @@ Zufallszahl zz1 im gewählten Zahlenbereich 10...bereich_max
 Minuend Zufallszahl zz2 so bestimmen, dass voriger Zehner unterschritten, vor-voriger Zehner aber nicht unterschritten wird
 
 - 100er Feld: Ausgangszahl, 3+ Pfeile > Ergebnis
+
+100er Feld ist
+
+```
+  1   2   3   4   5   6   7   8   9  10
+ 11  12  13  14  15  16  17  18  19  20
+ 21  22 ...
+ ...
+ 91  92  93  94  95  96  97  98  99 100
+```
+Zufallszahl aus diesem Zahlenfeld
+2 bis 6 Pfeile (variabel?) Pfeile ob, re, un, li so, dass man das Zahlenfeld nicht verlässt
+Gesucht ist die Ergebniszahl, wenn man den Pfeilen folgt
+  
 - Division "in": Wieviel ist 3 in 12, etc im 20er RAum / 50er Raum / 100er Raum mit Zahlen von 2 bis 10
 
 ## Einrichten App am Webserver
