@@ -50,6 +50,8 @@ Wie oft geht 4 in 16?
 var bereich_max, max_multiplikand1, max_multiplikand2, evtl. Option "mit 0"
 zz1 als Zufallszahl 0/1...max_multiplikand1, zz2 dito bestimmen
 
+- Division: Zahlenbreich? Reihe? > Bettina bzw. Flex&Flo Buch
+
 ## Einrichten App am Webserver
 
 ### Datenbankserver
