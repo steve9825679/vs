@@ -1,5 +1,7 @@
 ## Volksschul APP
 
+Projekt WPG Informatik 8. Klasse am BG BRG Gmunden in Kooperation mit der 2. Klasse Volksschule Ohlsdorf
+
 ## Module
 
 - Kleines 1x1 Training Training
