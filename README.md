@@ -22,18 +22,21 @@ var zz1, zz2 mit zz1 und zz2 0...10
   
 - Überschreitungen im 20er Raum / 50er Raum / 100er Raum ... 
 
+```Simeon```
 var bereich_max
 Zufallszahl zz1 im gewählten Zahlenbereich 0...bereich_max-10
 Summand Zufallszahl zz2 so bestimmen, dass nächster Zehner überschritten, übernächster Zehner aber nicht überschritten wird
 
 - Unterschreitungen im 20er Raum / 50er Raum / 100er Raum ... 
 
+Simeon
 var bereich_max
 Zufallszahl zz1 im gewählten Zahlenbereich 10...bereich_max
 Minuend Zufallszahl zz2 so bestimmen, dass voriger Zehner unterschritten, vor-voriger Zehner aber nicht unterschritten wird
 
 - 100er Feld: Ausgangszahl, 3+ Pfeile > Ergebnis
 
+```Lucas```
 100er Feld ist
 
 ```
@@ -48,11 +51,18 @@ Gesucht ist die Ergebniszahl, wenn man den Pfeilen folgt
   
 - Division "in": Wieviel ist 3 in 12, etc im 20er RAum / 50er Raum / 100er Raum mit Zahlen von 2 bis 10
 
+```Sebastian```
 Wie oft geht 4 in 16?
 var bereich_max, max_multiplikand1, max_multiplikand2, evtl. Option "mit 0"
 zz1 als Zufallszahl 0/1...max_multiplikand1, zz2 dito bestimmen
 
 - Division: Zahlenbreich? Reihe? > Bettina bzw. Flex&Flo Buch
+
+- Vorgänger-Nachfolger, Vorzehner-Nachzehner
+
+```Ella```
+15 ... 16 ... 17
+10 ... 16 ... 20
 
 ## Einrichten App am Webserver
 
