@@ -1,8 +1,35 @@
 <script setup>
-</script>
+import { ref, onMounted } from 'vue';
 
+let randNumber = ref(0);
+
+const numbers = ref(Array.from({ length: 100 }, (_, i) => i + 1));
+
+const randomNumber = (min, max) => {
+  randNumber.value = Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+function generateAddNew() {
+    randomNumber(1, 100)
+}
+function handleClick(number) {
+  if (number === randNumber.value) {
+    alert("Correct");
+    randomNumber(1, 100)
+  } else {
+    alert("Wrong, try again!");
+  }
+}
+
+onMounted(() => {
+  randomNumber(1, 100);
+});
+</script>
 <template>
   <div id="app">
+    <div>
+        Clicken Sie {{randNumber}};
+    </div>
     <div class="grid">
       <div v-for="number in numbers" :key="number" @click="handleClick(number)" class="grid-item">
         {{ number }}
