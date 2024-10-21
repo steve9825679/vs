@@ -9,7 +9,8 @@ Alpine.start();
 
 import { createApp } from 'vue';
 import Calculator from './components/calculator/Caculator.vue';
+import PredecessorSucessor from './components/ella/PredecessorSuccessor.vue';
  
 createApp({})
-  .component('calculator', Calculator)
+  .component('predecessor-successor', PredecessorSucessor)
   .mount('#app')
