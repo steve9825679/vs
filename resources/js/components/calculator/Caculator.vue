@@ -123,7 +123,10 @@
             <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-2">
                 <div class="flex flex-wrap place-content-center h-full">
                     <div v-for="result in results" :key="`result${result}`">
-                        <button class="w-20 h-20 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-4xl m-2 p-2 hover:bg-sky-600 transition" @click.prevent="check_result(result)">{{ result }}</button>
+                        <button 
+                            class="w-20 h-20 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-4xl m-2 p-2 hover:bg-sky-600 transition" 
+                            @click.prevent="check_result(result)"
+                        >{{ result }}</button>
                     </div>
                 </div>
             </div>
