@@ -1,15 +1,15 @@
 <template>
-    <div class="game-container">
-      <h3>Wo versteckt sich die Zahl <strong>{{ targetNumber }}</strong> im 100er Feld?</h3>
+    <div class="game-container3">
+      <h3 class="text-4xl">Wo versteckt sich die Zahl <strong>{{ targetNumber }}</strong> im 100er Feld?</h3>
       <div class="info">
         <span>Gespielte Runden: {{ roundsPlayed }}</span> <span v-if="feedback" class="feedback">{{ feedback }}</span>
       </div>
   
-      <div class="grid">
+      <div class="grid3">
         <div
           v-for="number in grid"
           :key="number"
-          class="grid-item"
+          class="grid-item3"
           :class="{ correct: isCorrect(number) }"
           @click="handleClick(number)"
         >
@@ -71,11 +71,11 @@
   </script>
   
   <style scoped>
-  .game-container {
+  .game-container3 {
     text-align: center;
   }
   
-  .grid {
+  .grid3 {
     display: grid;
     grid-template-columns: repeat(10, 50px);
     grid-gap: 5px;
@@ -83,7 +83,7 @@
     margin: 20px auto;
   }
   
-  .grid-item {
+  .grid-item3 {
     width: 50px;
     height: 50px;
     border: 1px solid #ccc;

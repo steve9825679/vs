@@ -194,7 +194,7 @@ function generateOptions(correctResult) {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(10, 30px);
+  grid-template-columns: repeat(10, 40px);
   grid-gap: 5px;
 }
 

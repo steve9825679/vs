@@ -6,19 +6,22 @@
           {{ game.label }}
         </option>
       </select>
-  
+
+      <div class="text-center text-6xl py-4 text-pink-800 bg-amber-400">
+          VS Ohlsdorf App
+      </div>
+
       <!-- Display the selected game dynamically -->
       <component :is="currentGameComponent" v-if="currentGameComponent"></component>
     </div>
 </template>
   
 <script>
-  import { ref } from 'vue';
+  import { ref, shallowRef } from 'vue';
   import NumberGame from './krs/NumberGame.vue';
   import Calculator from './calculator/Caculator.vue';
   import ArrowGame from './krs/ArrowGame.vue';
-  // Add more games as needed
-  // import OtherGame from './OtherGame.vue';
+  import NumberBridge from './krs/NumberBridge.vue';
   
   export default {
     setup() {
@@ -27,13 +30,12 @@
         { name: 'NumberGame', label: 'Zahlen im 100er Feld', component: NumberGame },
         { name: 'ArrowGame', label: 'Pfade im 100er Feld', component: ArrowGame },
         { name: 'Calculator', label: 'Kleines 1x1', component: Calculator },
-        // Add more games here
-        // { name: 'OtherGame', label: 'Other Game', component: OtherGame },
+        { name: 'NumberBridge', label: 'Vorzehner - Nachzehner', component: NumberBridge },
       ];
   
       // Reactive reference for selected game
       const selectedGame = ref(games[0].name);
-      const currentGameComponent = ref(games[0].component);
+      const currentGameComponent = shallowRef(games[0].component);
   
       // Load the selected game component
       const loadGame = () => {
