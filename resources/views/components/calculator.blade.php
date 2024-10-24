@@ -1,1 +1,1 @@
-<calculator></calculator>
+<game-selector></game-selector>
