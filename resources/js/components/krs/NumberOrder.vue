@@ -1,12 +1,9 @@
 <template>
     <div class="game-container">
-      <h2>Setze das Größer bzw. Kleiner Zeichen richtig ein!!</h2>
+      <h2 class="text-4xl">Setze das Größer bzw. Kleiner Zeichen richtig ein!</h2>
       <div class="d-flex">
         <div>
             Runde: {{ round }}
-        </div>
-        <div v-if="feedback" class="feedback" :class="{ correct: isCorrect, incorrect: !isCorrect }">
-            {{ feedback }}
         </div>
       </div>
       
@@ -22,6 +19,15 @@
         <button class="sign-button" @click="checkSign('>')"> > </button>
         <button class="sign-button" @click="checkSign('<')"> < </button>
       </div>
+      <div v-else>
+        <button class="sign-button-invisible">&nbsp;</button>
+      </div>
+
+      <div v-if="feedback" class="feedback" :class="{ correct: isCorrect, incorrect: !isCorrect }">
+            {{ feedback }}
+      </div>
+      <div v-else>&nbsp;</div>
+
     </div>
   </template>
   
@@ -67,7 +73,6 @@
   
   <style scoped>
   .game-container {
-    max-width: 400px;
     margin: auto;
     text-align: center;
   }
@@ -93,6 +98,11 @@
     cursor: pointer;
     border: 2px solid grey;
     border-radius: 5px;
+  }
+  .sign-button-invisible {
+    font-size: 2rem;
+    padding: 20px 40px;
+    margin: 5px;
   }
   .feedback {
     font-size: 1.2rem;

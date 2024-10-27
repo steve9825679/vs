@@ -22,7 +22,8 @@
   import Calculator from './calculator/Caculator.vue';
   import ArrowGame from './krs/ArrowGame.vue';
   import NumberBridge from './krs/NumberBridge.vue';
-  import NumberOrder from './krs/NumberOrder.vue'
+  import NumberOrder from './krs/NumberOrder.vue';
+  import MathChallengeSquare from './krs/MathChallengeSquare.vue';
   
   export default {
     setup() {
@@ -33,6 +34,7 @@
         { name: 'Calculator', label: 'Kleines 1x1', component: Calculator },
         { name: 'NumberBridge', label: 'Vorzehner - Nachzehner', component: NumberBridge },
         { name: 'NumberOrder', label: 'Größer / Kleiner Zeichen', component: NumberOrder },
+        { name: 'MathChallengeSquare', label: 'Rechnung zu nächsten Zehner', component: MathChallengeSquare },
       ];
   
       // Reactive reference for selected game
