@@ -22,6 +22,7 @@
   import Calculator from './calculator/Caculator.vue';
   import ArrowGame from './krs/ArrowGame.vue';
   import NumberBridge from './krs/NumberBridge.vue';
+  import NumberOrder from './krs/NumberOrder.vue'
   
   export default {
     setup() {
@@ -31,6 +32,7 @@
         { name: 'ArrowGame', label: 'Pfade im 100er Feld', component: ArrowGame },
         { name: 'Calculator', label: 'Kleines 1x1', component: Calculator },
         { name: 'NumberBridge', label: 'Vorzehner - Nachzehner', component: NumberBridge },
+        { name: 'NumberOrder', label: 'Größer / Kleiner Zeichen', component: NumberOrder },
       ];
   
       // Reactive reference for selected game
