@@ -1,7 +1,9 @@
 <template>
     <div class="math-challenge-square">
-      <h2>Round {{ roundCounter }}</h2>
-      <p>Solve: {{ a }} {{ operation }} b = {{ c }}</p>
+      <h2>Runde {{ roundCounter }}</h2>
+      <p class="text-4xl">{{ a }} {{ operation }} _____ = {{ c }}</p>
+
+      <div v-if="feedbackMessage" class="feedback">{{ feedbackMessage }}</div>
   
       <div class="grid">
         <button
@@ -14,7 +16,6 @@
         </button>
       </div>
   
-      <div v-if="feedbackMessage" class="feedback">{{ feedbackMessage }}</div>
     </div>
   </template>
 
@@ -37,46 +38,55 @@ export default {
   },
   methods: {
     generateCalculation() {
-      // Generate a random number for 'a' between 11 and 95
-      this.a = Math.floor(Math.random() * 85) + 11;
+    // Generate a random number for 'a' between 11 and 95
+    this.a = Math.floor(Math.random() * 85) + 11;
 
-      // Randomly choose an operation (either '+' or '-')
-      this.operation = Math.random() > 0.5 ? "+" : "-";
+    // Randomly choose an operation (either '+' or '-')
+    this.operation = Math.random() > 0.5 ? "+" : "-";
 
-      // Calculate 'c' as the nearest multiple of 10 to 'a'
-      this.c = Math.round(this.a / 10) * 10;
+    // Calculate 'c' as a multiple of 10 and ensure 'b' is positive
+    if (this.operation === "+") {
+      // For addition, set 'c' as the next multiple of 10 greater than 'a'
+      this.c = Math.ceil(this.a / 10) * 10;
+    } else {
+      // For subtraction, set 'c' as the previous multiple of 10 less than 'a'
+      this.c = Math.floor(this.a / 10) * 10;
+    }
 
-      // Determine the correct answer 'b' based on the operation
-      this.correctAnswer = this.operation === "+" ? this.c - this.a : this.a - this.c;
+    // Determine the correct answer 'b' based on the operation
+    this.correctAnswer = this.operation === "+" ? this.c - this.a : this.a - this.c;
 
-      // Generate 16 random options including the correct answer
-      this.options = this.generateOptions(this.correctAnswer);
-    },
-    generateOptions(correctAnswer) {
-      const options = new Set();
-      // Add the correct answer
-      options.add(correctAnswer);
-      // Add 15 random values close to the correct answer
-      while (options.size < 9) {
-        const randomOption = correctAnswer + Math.floor(Math.random() * 50);
-        if (randomOption >= 0) {
-            options.add(randomOption);
-        }
+    // Generate 16 random options including the correct answer
+    this.options = this.generateOptions(this.correctAnswer);
+  },
+  generateOptions(correctAnswer) {
+    const options = new Set();
+    // Add the correct answer
+    options.add(correctAnswer);
+
+    // Generate 15 random positive values close to the correct answer
+    while (options.size < 9) {
+      let randomOption = correctAnswer + Math.floor(Math.random() * 21 - 10);
+
+      // Ensure the generated option is positive
+      if (randomOption > 0) {
+        options.add(randomOption);
       }
-      // Shuffle options and return as array
-      return Array.from(options).sort(() => Math.random() - 0.5);
-    },
+    }
+    // Shuffle options and return as an array
+    return Array.from(options).sort(() => Math.random() - 0.5);
+  },
     checkAnswer(option) {
       this.selectedAnswer = option;
       if (option === this.correctAnswer) {
         this.isCorrect = true;
-        this.feedbackMessage = "Correct! Well done!";
+        this.feedbackMessage = "Richtig! Gut gemacht!";
         setTimeout(() => {
           this.nextRound();
         }, 1000);
       } else {
         this.isCorrect = false;
-        this.feedbackMessage = "Incorrect. Try again!";
+        this.feedbackMessage = "Leider nein, probier's nochmal!";
       }
     },
     nextRound() {
