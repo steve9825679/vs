@@ -1,24 +1,37 @@
 <template>
-    <div class="math-challenge-square">
-      <h2>Runde {{ roundCounter }}</h2>
-      <p class="text-4xl">{{ a }} {{ operation }} _____ = {{ c }}</p>
-
-      <div v-if="feedbackMessage" class="feedback">{{ feedbackMessage }}</div>
-  
-      <div class="grid">
-        <button
-          v-for="(option, index) in options"
-          :key="index"
-          @click="checkAnswer(option)"
-          :class="{ correct: option === correctAnswer && isCorrect, incorrect: option === selectedAnswer && !isCorrect }"
-        >
-          {{ option }}
-        </button>
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6">
+      <!-- Left Column: Calculation Question -->
+      <div class="w-full md:w-1/3 text-center md:text-left">
+        <p class="text-4xl mt-2">{{ a }} {{ operation }} b = {{ c }}</p>
       </div>
   
+      <!-- Middle Column: Round Counter and Feedback -->
+      <div class="w-full md:w-1/3 text-center">
+        <h2 class="text-xl font-semibold">Runde {{ roundCounter }}</h2>
+        <p v-if="feedbackMessage" class="text-lg mt-2 font-medium text-gray-700">{{ feedbackMessage }}</p>
+      </div>
+  
+      <!-- Right Column: Solution Grid -->
+      <div class="w-full md:w-1/3 flex justify-center">
+        <div class="grid grid-cols-4 gap-3">
+          <button
+            v-for="(option, index) in options"
+            :key="index"
+            @click="checkAnswer(option)"
+            :class="{
+              'bg-green-500 text-white': option === correctAnswer && isCorrect,
+              'bg-red-500 text-white': option === selectedAnswer && !isCorrect,
+              'bg-white text-gray-800': option !== selectedAnswer && option !== correctAnswer,
+            }"
+            class="w-16 h-16 flex items-center justify-center text-xl font-semibold border-2 border-gray-300 rounded-lg hover:bg-gray-100 transition"
+          >
+            {{ option }}
+          </button>
+        </div>
+      </div>
     </div>
   </template>
-
+  
 <script>
 export default {
   name: "MathChallengeSquare",
