@@ -2,7 +2,7 @@
     <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-6">
       <!-- Left Column: Calculation Question -->
       <div class="w-full md:w-1/3 text-center md:text-left">
-        <p class="text-4xl mt-2">{{ a }} {{ operation }} b = {{ c }}</p>
+        <p class="text-4xl mt-2">{{ a }} {{ operation }} ___ = {{ c }}</p>
       </div>
   
       <!-- Middle Column: Round Counter and Feedback -->
