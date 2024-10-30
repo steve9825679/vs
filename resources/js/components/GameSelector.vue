@@ -24,6 +24,7 @@
   import NumberBridge from './krs/NumberBridge.vue';
   import NumberOrder from './krs/NumberOrder.vue';
   import MathChallengeSquare from './krs/MathChallengeSquare.vue';
+  import MultipleGame from './krs/MultipleGame.vue';
   
   export default {
     setup() {
@@ -35,6 +36,7 @@
         { name: 'NumberBridge', label: 'Vorzehner - Nachzehner', component: NumberBridge },
         { name: 'NumberOrder', label: 'Größer / Kleiner Zeichen', component: NumberOrder },
         { name: 'MathChallengeSquare', label: 'Rechnung zu nächsten Zehner', component: MathChallengeSquare },
+        { name: 'MultipleGame', label: 'Reihen mit Fehler', component: MultipleGame },
       ];
   
       // Reactive reference for selected game
