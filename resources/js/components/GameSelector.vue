@@ -25,6 +25,7 @@
   import NumberOrder from './krs/NumberOrder.vue';
   import MathChallengeSquare from './krs/MathChallengeSquare.vue';
   import MultipleGame from './krs/MultipleGame.vue';
+  import VisualMultipleGame from './krs/VisualMultipleGame.vue';
   
   export default {
     setup() {
@@ -37,6 +38,7 @@
         { name: 'NumberOrder', label: 'Größer / Kleiner Zeichen', component: NumberOrder },
         { name: 'MathChallengeSquare', label: 'Rechnung zu nächsten Zehner', component: MathChallengeSquare },
         { name: 'MultipleGame', label: 'Reihen mit Fehler', component: MultipleGame },
+        { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       ];
   
       // Reactive reference for selected game
