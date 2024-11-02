@@ -6,13 +6,13 @@
           v-for="row in length"
           :key="`row-${row}`"
           class="row"
-          :style="{ backgroundColor: getBrightColor(row) }"
+          :style="{ color: getBrightColor(row) }"
         >
           <div
             v-for="col in width"
             :key="`col-${col}`"
             class="symbol"
-          >&#9787;</div>
+          >&#9786;</div>
         </div>
       </div>
   
@@ -49,7 +49,7 @@
         feedback: "Wähle die richtige Antwort...",
         solutionGrid: [],
         clickedIndex: null,
-        brightColors: ["#FFCDD2", "#F8BBD0", "#E1BEE7", "#D1C4E9", "#C5CAE9", "#BBDEFB", "#B3E5FC", "#B2EBF2", "#B2DFDB", "#C8E6C9"]
+        brightColors: ["#8D6E63", "#A1887F", "#D32F2F", "#7B1FA2", "#303F9F", "#1976D2", "#0288D1", "#388E3C", "#FBC02D", "#F57C00"]
       };
     },
     mounted() {
@@ -76,17 +76,17 @@
         this.solutionGrid = this.solutionGrid.sort(() => Math.random() - 0.5);
   
         // Reset feedback and clicked state
-        this.feedback = "Select the correct answer";
+        this.feedback = "Wähle die richtige Antwort!";
         this.clickedIndex = null;
       },
       handleClick(index) {
         this.clickedIndex = index;
         if (this.solutionGrid[index] === this.targetSolution) {
-          this.feedback = "Correct! Moving to the next round.";
+          this.feedback = "Richtig! Nächste Runde...";
           this.round++;
           setTimeout(this.newRound, 1000);
         } else {
-          this.feedback = "Wrong answer! Try again.";
+          this.feedback = "Leider nicht richtig. Nochmals!";
         }
       },
       isCorrect(index) {
@@ -119,12 +119,13 @@
   }
   
   .symbol {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     font-size: 2.5em;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 0.25rem;
   }
   
   .game-info {
