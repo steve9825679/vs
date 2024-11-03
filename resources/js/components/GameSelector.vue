@@ -1,77 +1,131 @@
 <template>
-    <div class="game-selector-container">
-      <!-- Dropdown to select a game -->
+  <div class="game-selector-container">
+    <!-- Top Section with "X" and Select Menu -->
+    <div class="top-section">
+      <div class="close-button">
+        <a href="/">&#10005;</a>
+      </div>
       <select v-model="selectedGame" @change="loadGame" class="selectbox">
         <option v-for="game in games" :key="game.name" :value="game.name">
           {{ game.label }}
         </option>
       </select>
-
-      <div class="text-center text-6xl py-4 text-pink-800 bg-amber-400">
-          VS Ohlsdorf App
-      </div>
-
-      <!-- Display the selected game dynamically -->
-      <component :is="currentGameComponent" v-if="currentGameComponent"></component>
     </div>
+
+    <!-- Bottom Section with Heading and Game Container -->
+    <div class="bottom-section">
+      <div class="heading">
+        VS Ohlsdorf App
+      </div>
+      <div class="game-component">
+        <component :is="currentGameComponent" v-if="currentGameComponent"></component>
+      </div>
+    </div>
+  </div>
 </template>
-  
+
 <script>
-  import { ref, shallowRef } from 'vue';
-  import NumberGame from './krs/NumberGame.vue';
-  import Calculator from './calculator/Caculator.vue';
-  import ArrowGame from './krs/ArrowGame.vue';
-  import NumberBridge from './krs/NumberBridge.vue';
-  import NumberOrder from './krs/NumberOrder.vue';
-  import MathChallengeSquare from './krs/MathChallengeSquare.vue';
-  import MultipleGame from './krs/MultipleGame.vue';
-  import VisualMultipleGame from './krs/VisualMultipleGame.vue';
-  
-  export default {
-    setup() {
-      // List of available games
-      const games = [
-        { name: 'NumberGame', label: 'Zahlen im 100er Feld', component: NumberGame },
-        { name: 'ArrowGame', label: 'Pfade im 100er Feld', component: ArrowGame },
-        { name: 'Calculator', label: 'Kleines 1x1', component: Calculator },
-        { name: 'NumberBridge', label: 'Vorzehner - Nachzehner', component: NumberBridge },
-        { name: 'NumberOrder', label: 'Größer / Kleiner Zeichen', component: NumberOrder },
-        { name: 'MathChallengeSquare', label: 'Rechnung zu nächsten Zehner', component: MathChallengeSquare },
-        { name: 'MultipleGame', label: 'Reihen mit Fehler', component: MultipleGame },
-        { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
-      ];
-  
-      // Reactive reference for selected game
-      const selectedGame = ref(games[0].name);
-      const currentGameComponent = shallowRef(games[0].component);
-  
-      // Load the selected game component
-      const loadGame = () => {
-        const game = games.find((g) => g.name === selectedGame.value);
-        currentGameComponent.value = game.component;
-      };
-  
-      return {
-        games,
-        selectedGame,
-        currentGameComponent,
-        loadGame,
-      };
-    },
-  };
+import { ref, shallowRef, onMounted, nextTick } from 'vue';
+import NumberGame from './krs/NumberGame.vue';
+import Calculator from './calculator/Caculator.vue';
+import ArrowGame from './krs/ArrowGame.vue';
+import NumberBridge from './krs/NumberBridge.vue';
+import NumberOrder from './krs/NumberOrder.vue';
+import MathChallengeSquare from './krs/MathChallengeSquare.vue';
+import MultipleGame from './krs/MultipleGame.vue';
+import VisualMultipleGame from './krs/VisualMultipleGame.vue';
+
+export default {
+  setup() {
+    const games = [
+      { name: 'NumberGame', label: 'Zahlen im 100er Feld', component: NumberGame },
+      { name: 'ArrowGame', label: 'Pfade im 100er Feld', component: ArrowGame },
+      { name: 'Calculator', label: 'Kleines 1x1', component: Calculator },
+      { name: 'NumberBridge', label: 'Vorzehner - Nachzehner', component: NumberBridge },
+      { name: 'NumberOrder', label: 'Größer / Kleiner Zeichen', component: NumberOrder },
+      { name: 'MathChallengeSquare', label: 'Rechnung zu nächsten Zehner', component: MathChallengeSquare },
+      { name: 'MultipleGame', label: 'Reihen mit Fehler', component: MultipleGame },
+      { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
+    ];
+
+    const selectedGame = ref(games[0].name);
+    const currentGameComponent = shallowRef(games[0].component);
+
+    const loadGame = () => {
+      const game = games.find((g) => g.name === selectedGame.value);
+      currentGameComponent.value = game.component;
+    };
+
+    return {
+      games,
+      selectedGame,
+      currentGameComponent,
+      loadGame,
+    };
+  },
+};
 </script>
-  
+
 <style scoped>
-  .game-selector-container {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  select {
-    margin: 10px 0;
-    padding: 5px;
-    font-size: 16px;
-    width:18rem;
-  }
+/* Full-height flexbox container */
+.game-selector-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  background-color: #f3f4f6; /* Equivalent to bg-gray-100 */
+}
+
+/* Top Section: Close button and dropdown */
+.top-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+.close-button {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Dropdown styling */
+.selectbox {
+  padding: 5px;
+  font-size: 16px;
+  width: 18rem;
+}
+
+/* Bottom Section: Heading and Game Component */
+.bottom-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  width: 100%;
+}
+
+/* Heading styling */
+.heading {
+  font-size: 2.5rem;
+  color: #9c27b0; /* pink-800 color */
+  background-color: #ffca28; /* amber-400 color */
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Game Component styling */
+.game-component {
+  width: 100%;
+  background-color: #ffffff; /* Equivalent to bg-white */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  border-radius: 8px;
+  padding: 20px;
+  flex-grow: 1;
+}
 </style>
-  
