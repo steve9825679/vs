@@ -34,6 +34,7 @@ import NumberOrder from './krs/NumberOrder.vue';
 import MathChallengeSquare from './krs/MathChallengeSquare.vue';
 import MultipleGame from './krs/MultipleGame.vue';
 import VisualMultipleGame from './krs/VisualMultipleGame.vue';
+import MultiplierSameGame from './krs/MultiplierSameGame.vue';
 
 export default {
   setup() {
@@ -46,6 +47,7 @@ export default {
       { name: 'MathChallengeSquare', label: 'Rechnung zu nächsten Zehner', component: MathChallengeSquare },
       { name: 'MultipleGame', label: 'Reihen mit Fehler', component: MultipleGame },
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
+      { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
     ];
 
     const selectedGame = ref(games[0].name);
