@@ -1,1 +1,2 @@
-<division-in></division-in>
+<game-selector></game-selector>
+

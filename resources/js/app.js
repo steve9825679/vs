@@ -8,10 +8,10 @@ Alpine.start();
 
 
 import { createApp } from 'vue';
-import Calculator from './components/calculator/Caculator.vue';
-import DivisionIn from './components/sebf/DivisionIn.vue';
+
+import GameSelector from './components/GameSelector.vue';
  
 createApp({})
-  .component('calculator', Calculator)
-  .component('division-in', DivisionIn)
+  .component('game-selector', GameSelector)
+
   .mount('#app')
