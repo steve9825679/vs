@@ -1,1 +1,1 @@
-<finding-hundrets></finding-hundrets>
+<game-selector></game-selector>
