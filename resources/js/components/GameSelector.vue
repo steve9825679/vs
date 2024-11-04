@@ -35,6 +35,7 @@ import MathChallengeSquare from './krs/MathChallengeSquare.vue';
 import MultipleGame from './krs/MultipleGame.vue';
 import VisualMultipleGame from './krs/VisualMultipleGame.vue';
 import MultiplierSameGame from './krs/MultiplierSameGame.vue';
+import Numberline from './krs/Numberline.vue';
 
 export default {
   setup() {
@@ -48,6 +49,7 @@ export default {
       { name: 'MultipleGame', label: 'Reihen mit Fehler', component: MultipleGame },
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
+      { name: 'NumberlineGame', label: 'Zahl auf der Linie', component: Numberline },
     ];
 
     const selectedGame = ref(games[0].name);
