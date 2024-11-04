@@ -8,8 +8,8 @@ Alpine.start();
 
 
 import { createApp } from 'vue';
-import Calculator from './components/calculator/Caculator.vue';
+import GameSelector from './components/GameSelector.vue';
  
 createApp({})
-  .component('calculator', Calculator)
+  .component('game-selector', GameSelector)
   .mount('#app')
