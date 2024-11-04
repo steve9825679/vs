@@ -8,11 +8,8 @@ Alpine.start();
 
 
 import { createApp } from 'vue';
-import Calculator from './components/calculator/Caculator.vue';
-import CarryOverTen from './components/calculator/simeon/CarryOverTen.vue';
+import GameSelector from './components/GameSelector.vue';
  
 createApp({})
-  .component('calculator', Calculator)
-  .component('carry-over-ten', CarryOverTen)  
+  .component('game-selector', GameSelector)
   .mount('#app')
-  

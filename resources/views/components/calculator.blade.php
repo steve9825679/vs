@@ -1,1 +1,1 @@
-<carry-over-ten><carry-over-ten/>
+<game-selector></game-selector>
