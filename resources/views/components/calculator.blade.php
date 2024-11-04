@@ -1,1 +1,1 @@
-<board-100></board-100>
+<game-selector></game-selector>
