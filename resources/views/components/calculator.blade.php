@@ -1,1 +1,1 @@
-<Division></Division>
+<game-selector></game-selector>
