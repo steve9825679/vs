@@ -36,6 +36,7 @@ import MultipleGame from './krs/MultipleGame.vue';
 import VisualMultipleGame from './krs/VisualMultipleGame.vue';
 import MultiplierSameGame from './krs/MultiplierSameGame.vue';
 import Stellen from './krs/Stellen.vue';
+import IntegerDivision from './krs/IntegerDivision.vue';
 
 export default {
   setup() {
@@ -50,6 +51,7 @@ export default {
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
       { name: 'Stellen', label: 'Stellen bestimmen', component: Stellen },
+      { name: 'IntegerDivision', label: 'Division', component: IntegerDivision },
     ];
 
     const selectedGame = ref(games[0].name);
