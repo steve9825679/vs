@@ -8,9 +8,9 @@ Alpine.start();
 
 
 import { createApp } from 'vue';
-import Calculator from './components/calculator/Caculator.vue';
-import PredecessorSucessor from './components/ella/PredecessorSuccessor.vue';
+
+import GameSelector from './components/GameSelector.vue';
  
 createApp({})
-  .component('predecessor-successor', PredecessorSucessor)
+  .component('game-selector', GameSelector)
   .mount('#app')

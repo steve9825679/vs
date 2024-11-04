@@ -1,1 +1,2 @@
-<predecessor-successor></predecessor-successor>
+
+<game-selector></game-selector>
