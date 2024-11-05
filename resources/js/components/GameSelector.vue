@@ -49,7 +49,7 @@ export default {
       { name: 'MultipleGame', label: 'Reihen mit Fehler', component: MultipleGame },
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
-      { name: 'NumberlineGame', label: 'Zahl auf der Linie', component: Numberline },
+      { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
     ];
 
     const selectedGame = ref(games[0].name);
