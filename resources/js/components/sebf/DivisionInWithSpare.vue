@@ -17,18 +17,19 @@
         <div class="flex justify-between">
             <!-- Aufgabe links -->
             <div 
-                class="h-96 w-96 border-amber-300 border-4 rounded-lg p-2 cursor-pointer" 
+                class="h-96 w-1/3 border-amber-300 border-4 rounded-lg p-2 cursor-pointer" 
                 @click="generateNextTaskIfCorrect"
             >
                 <div class="grid place-items-center h-full text-4xl">
-                    <!-- Anzeige "Klick mich!" statt der Aufgabe -->
                     <div v-if="correctAnswerSelected" class="bounce-animation">Klick mich!</div>
-                    <div v-else>Wie oft geht {{ task.divisor }} in {{ task.dividend }}?</div>
+                    <div v-else>
+                        <span>Wie oft geht {{ task.divisor }} in {{ task.dividend }}?</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Ergebnis und Feedback -->
-            <div class="h-full grid self-center text-center">
+            <!-- Ergebnis und Feedback in der Mitte -->
+            <div class="h-96 w-1/3 grid self-center text-center">
                 <div class="text-2xl mb-4">
                     Runde {{ round }}
                 </div>
@@ -43,18 +44,35 @@
                         {{ currentNegativeMessage }}
                     </div>
                 </div>
-            </div>
 
-            <!-- Antwortmöglichkeiten rechts -->
-            <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-2">
+                <!-- Antwortmöglichkeiten in der Mitte -->
                 <div class="flex flex-wrap place-content-center h-full">
                     <div v-for="answer in shuffledAnswers" :key="`answer-${answer}`">
                         <button 
                             @click.prevent="checkAnswer(answer)"
+                            :disabled="isLocked"
                             class="w-20 h-20 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-4xl m-2 p-2 hover:bg-sky-600 transition"
                         >
                             {{ answer }}
                         </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restauswahl rechts -->
+            <div class="h-96 w-1/3 border-amber-300 border-4 rounded-lg p-2">
+                <div class="flex flex-col items-center h-full">
+                    <label class="text-2xl mb-2">Wähle den Rest:</label>
+                    <div class="flex flex-wrap justify-center h-full">
+                        <div v-for="remainder in possibleRemainders" :key="`remainder-${remainder}`">
+                            <button 
+                                @click.prevent="checkRemainder(remainder)"
+                                :disabled="isLocked"
+                                class="w-20 h-20 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-4xl m-2 p-2 hover:bg-sky-600 transition"
+                            >
+                                {{ remainder }}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,7 +86,7 @@ import { ref } from 'vue';
 export default {
     setup() {
         const selectedRow = ref(1);
-        const task = ref({ divisor: 0, dividend: 0, solution: 0 });
+        const task = ref({ divisor: 0, dividend: 0, solution: 0, remainder: 0 });
         const ok = ref(false);
         const nok = ref(false);
         const round = ref(0);
@@ -76,6 +94,10 @@ export default {
         const correctAnswerSelected = ref(false);
         const currentPositiveMessage = ref("");
         const currentNegativeMessage = ref("");
+        const isLocked = ref(false);
+        const possibleRemainders = ref([]);
+        const userAnswer = ref(null);
+        const userRemainder = ref(null);
 
         // Positive und motivierende Nachrichten erweitern
         const positiveMessages = [
@@ -85,7 +107,7 @@ export default {
         const negativeMessages = [
             "Versuch's nochmal!", "Du schaffst das!", "Weiter so!", 
             "Gib nicht auf!", "Das klappt gleich!", "Schon fast da!", 
-            "Noch einmal!", "Ganz nah dran!", "Bleib dran!"
+            "Probiers nochmal!", "fast!", "Bleib dran!", "Nächstes mal!", "Nochmal!"
         ];
 
         const getRandomMessage = (messagesArray) => messagesArray[Math.floor(Math.random() * messagesArray.length)];
@@ -105,13 +127,20 @@ export default {
         const generateTask = () => {
             const divisor = selectedRow.value;
             const multiplier = randomIntFromInterval(1, 10);
-            const dividend = divisor * multiplier;
-            task.value = { divisor, dividend, solution: multiplier };
+            const dividend = divisor * multiplier + randomIntFromInterval(1, divisor - 1); // Sicherstellen, dass ein Rest entsteht
+
+            task.value = { divisor, dividend, solution: multiplier, remainder: dividend % divisor };
 
             shuffledAnswers.value = shuffleArray(Array.from({ length: 10 }, (_, i) => i + 1));
             round.value++;
             ok.value = nok.value = false;
             correctAnswerSelected.value = false;
+            isLocked.value = false; // Reset isLocked for new task
+            userAnswer.value = null; // Reset user answers
+            userRemainder.value = null; // Reset user remainder
+
+            // Setzen der möglichen Reste
+            possibleRemainders.value = Array.from({ length: divisor }, (_, i) => i);
         };
 
         const generateNextTaskIfCorrect = () => {
@@ -126,11 +155,28 @@ export default {
         };
 
         const checkAnswer = (answer) => {
+            userAnswer.value = answer; // Setze die Benutzerantwort
             if (answer === task.value.solution) {
-                ok.value = true;
-                nok.value = false;
-                correctAnswerSelected.value = true;
-                currentPositiveMessage.value = getRandomMessage(positiveMessages);
+                if (userRemainder.value !== null) { // Sicherstellen, dass der Benutzer einen Rest gewählt hat
+                    const correctRemainder = task.value.dividend % task.value.divisor;
+                    if (userRemainder.value === correctRemainder) {
+                        ok.value = true;
+                        nok.value = false;
+                        correctAnswerSelected.value = true;
+                        isLocked.value = true; // Sperre die Buttons, wenn die Antwort richtig ist
+                        currentPositiveMessage.value = getRandomMessage(positiveMessages);
+                    } else {
+                        nok.value = true;
+                        ok.value = false;
+                        currentNegativeMessage.value = getRandomMessage(negativeMessages);
+                        setTimeout(() => (nok.value = false), 2500);
+                    }
+                } else {
+                    nok.value = true;
+                    ok.value = false;
+                    currentNegativeMessage.value = getRandomMessage(negativeMessages);
+                    setTimeout(() => (nok.value = false), 2500);
+                }
             } else {
                 nok.value = true;
                 ok.value = false;
@@ -138,6 +184,11 @@ export default {
                 currentNegativeMessage.value = getRandomMessage(negativeMessages);
                 setTimeout(() => (nok.value = false), 2500);
             }
+        };
+
+        const checkRemainder = (remainder) => {
+            userRemainder.value = remainder; // Setze die Benutzerantwort für den Rest
+            checkAnswer(userAnswer.value); // Überprüfe die Antwort zusammen mit dem Rest
         };
 
         generateTask();
@@ -152,9 +203,14 @@ export default {
             correctAnswerSelected,
             currentPositiveMessage,
             currentNegativeMessage,
+            isLocked,
+            possibleRemainders,
+            userAnswer,
+            userRemainder,
             selectRow,
             checkAnswer,
-            generateNextTaskIfCorrect
+            generateNextTaskIfCorrect,
+            checkRemainder,
         };
     }
 };
