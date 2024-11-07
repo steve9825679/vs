@@ -37,6 +37,8 @@ import VisualMultipleGame from './krs/VisualMultipleGame.vue';
 import MultiplierSameGame from './krs/MultiplierSameGame.vue';
 import DivisionIn from './sebf/DivisionIn.vue';
 import DivisionInWithSpare from './sebf/DivisionInWithSpare.vue';
+import PlusWieViel from './sebf/PlusWieViel.vue';
+import MultiplicationStepsOfTen from './sebf/MultiplicationStepsOfTen.vue';
 
 export default {
   setup() {
@@ -52,6 +54,8 @@ export default {
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
       { name: 'DivisionIn', label: 'Wie oft geht in', component: DivisionIn },
       { name: 'DivisionInWithSpare', label: 'Wie oft mit Rest', component: DivisionInWithSpare },
+      { name: 'PlusWieViel', label: 'Plus wie viel', component: PlusWieViel },
+      { name: 'MultiplicationStepsOfTen', label: 'Multiplikation in 10er Schritten', component: MultiplicationStepsOfTen },
     ];
 
     const selectedGame = ref(games[0].name);
