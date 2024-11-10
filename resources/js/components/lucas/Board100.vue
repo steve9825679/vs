@@ -1,11 +1,11 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 let randNumber = ref(0);
 let round = ref(1);
 const numbers = ref(Array.from({ length: 100 }, (_, i) => i + 1));
-let ok = ref(false);
-let wrong = ref(false);
+let feedbackMessage = ref(null);
+let feedbackColor = ref('');
 
 const randomNumber = (min, max) => {
   randNumber.value = Math.floor(Math.random() * (max - min + 1) + min);
@@ -17,16 +17,20 @@ function generateAddNew() {
 
 function checkNumber(number) {
   if (number === randNumber.value) {
-    ok.value = true;
+    feedbackMessage.value = "Suuuuuuper 👍";
+    feedbackColor.value = 'bg-green-700';
     round.value++;
     randomNumber(1, 100);
     setTimeout(() => {
-      ok.value = false;
+      feedbackMessage.value = null;
+      feedbackColor.value = null;
     }, 2000);
   } else {
-    wrong.value = true;
+    feedbackMessage.value = "Oiiiiiiii 😒";
+    feedbackColor.value = 'bg-slate-700';
     setTimeout(() => {
-      wrong.value = false;
+      feedbackMessage.value = null;
+      feedbackColor.value = null;
     }, 2000);
   }
 }
@@ -39,13 +43,10 @@ onMounted(() => {
 <template>
   <div id="app">
     <div class="header">
+      <h1 :class="feedbackColor">{{ feedbackMessage || `Runde ${round}` }}</h1>
       <h1 class="number">Drücke auf {{ randNumber }};</h1>
-      <h1>Runde {{ round }}</h1>
-      <div class="message" :class="{'success': ok, 'error': wrong}">
-        <span v-if="ok">Suuuuuuper 👍</span>
-        <span v-if="wrong">Oiiiiiiii 😒</span>
-      </div>
     </div>
+
     <div class="grid">
       <div
         v-for="number in numbers"
@@ -64,8 +65,8 @@ onMounted(() => {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   margin-top: 20px;
-  max-width: 600px; /* Adjust the overall container width */
-  margin: 0 auto; /* Center the container */
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .header {
@@ -77,37 +78,21 @@ onMounted(() => {
   margin: 0;
 }
 
-.message {
-  font-size: 1.2em;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
-  white-space: nowrap;
-}
-
-.success {
-  background-color: #38a169;
-}
-
-.error {
-  background-color: #718096;
-}
-
 .grid {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 10 columns for balance */
-  gap: 5px; /* Space between grid items */
-  width: 100%; /* Ensure the grid spans the entire width */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margin */
+  grid-template-columns: repeat(10, 1fr);
+  gap: 5px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .grid-item {
   border: 1px solid #ccc;
-  padding: 10px; /* Moderate padding for better fit */
+  padding: 10px;
   cursor: pointer;
   text-align: center;
-  font-size: 0.9em; /* Adjusted font size */
+  font-size: 0.9em;
   font-weight: bold;
   color: #d97706;
   background-color: #fde68a;
