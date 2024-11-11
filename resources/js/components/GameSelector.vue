@@ -36,6 +36,7 @@ import MultipleGame from './krs/MultipleGame.vue';
 import VisualMultipleGame from './krs/VisualMultipleGame.vue';
 import MultiplierSameGame from './krs/MultiplierSameGame.vue';
 import Board100 from './lucas/Board100.vue';
+import Numberline from './krs/Numberline.vue';
 
 export default {
   setup() {
@@ -50,6 +51,7 @@ export default {
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
       {name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100}
+      { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
     ];
 
     const selectedGame = ref(games[0].name);
