@@ -40,7 +40,7 @@
   <script>
   import { ref, computed } from 'vue';
   import JSConfetti from 'js-confetti';
-  const jsConfetti = new JSConfetti();
+
   export default {
     setup() {
       const number = ref(generateRandomNumber());
@@ -56,7 +56,8 @@
       const shakeScreen = ref(false);
       const flashRed = ref(false);
       const ripples = ref([]);
-  
+      const jsConfetti = new JSConfetti();
+
       const handleClick = (event) => {
         const line = event.currentTarget;
         const rect = line.getBoundingClientRect();
@@ -253,6 +254,8 @@
     position: absolute;
     top: 7px;
     right: 1em;
+    max-width: 15em;
+    text-align: right;
   }
   
   .perfect {

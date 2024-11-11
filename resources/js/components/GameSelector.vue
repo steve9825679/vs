@@ -35,8 +35,11 @@ import MathChallengeSquare from './krs/MathChallengeSquare.vue';
 import MultipleGame from './krs/MultipleGame.vue';
 import VisualMultipleGame from './krs/VisualMultipleGame.vue';
 import MultiplierSameGame from './krs/MultiplierSameGame.vue';
+import Division from './sebk/Division.vue';
+import CarryOverTen from './simeon/CarryOverTen.vue';
 import Board100 from './lucas/Board100.vue';
 import Numberline from './krs/Numberline.vue';
+
 
 export default {
   setup() {
@@ -50,7 +53,9 @@ export default {
       { name: 'MultipleGame', label: 'Reihen mit Fehler', component: MultipleGame },
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
-      {name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100},
+      { name: 'Division', label: 'Division', component: Division},
+      { name: '100er Feld', label: 'Zahlen Finden im 100er Feld', component: Board100},
+      { name: 'CarryOverTen', label: '10er Überschreiten', component: CarryOverTen },
       { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
     ];
 
