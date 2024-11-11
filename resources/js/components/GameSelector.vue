@@ -50,7 +50,7 @@ export default {
       { name: 'MultipleGame', label: 'Reihen mit Fehler', component: MultipleGame },
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
-      {name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100}
+      {name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100},
       { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
     ];
 
