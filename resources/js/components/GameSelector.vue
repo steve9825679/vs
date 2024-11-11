@@ -39,6 +39,7 @@ import Division from './sebk/Division.vue';
 import CarryOverTen from './simeon/CarryOverTen.vue';
 import Board100 from './lucas/Board100.vue';
 import Numberline from './krs/Numberline.vue';
+import KlaPuStri from './krs/KlaPuStri.vue';
 
 
 export default {
@@ -57,6 +58,8 @@ export default {
       { name: '100er Feld', label: 'Zahlen Finden im 100er Feld', component: Board100},
       { name: 'CarryOverTen', label: '10er Überschreiten', component: CarryOverTen },
       { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
+      { name: 'KlaPuStri', label: 'KlaPuStri', component: KlaPuStri },
+
     ];
 
     const selectedGame = ref(games[0].name);
