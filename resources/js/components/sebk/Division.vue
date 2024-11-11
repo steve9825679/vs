@@ -93,7 +93,7 @@ generateNewTask();
                         Moooooment...
                     </div>
                     <div v-else class="text-8xl">
-                        {{ dividend }} : {{ divisor }} = 
+                        {{ dividend }} ÷ {{ divisor }} = 
                     </div>
                     <!-- Button für die nächste Aufgabe bei richtiger Antwort -->
                     <button 
@@ -111,11 +111,11 @@ generateNewTask();
                 <div class="text-2xl text-center">
                     Runde {{ counter }}
                 </div>
-                <div class="text-4xl bg-green-700 text-white rounded-md py-3 px-8" v-show="ok">
-                    Suuuuuuuuper 👍
+                <div class="text-4xl bg-green-600 text-white rounded-md py-3 px-8" v-show="ok">
+                    Sehr gut 👍
                 </div>
                 <div class="text-4xl bg-slate-700 text-white rounded-md py-3 px-8" v-show="nok">
-                    Sehr schlecht! 😒
+                    Sehr falsch 
                 </div>
             </div>
 
