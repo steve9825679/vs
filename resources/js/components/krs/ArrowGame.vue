@@ -100,7 +100,7 @@ function generateArrows(start) {
   const arrows = [];
   let currentPosition = start;
 
-  const randomArrowCount = Math.floor(Math.random() * 15) + 15; // Between 3 and 5 arrows
+  const randomArrowCount = Math.floor(Math.random() * (5 - 3) + 3); // Between 3 and 5 arrows
 
   for (let i = 0; i < randomArrowCount; i++) {
     let validArrow;
