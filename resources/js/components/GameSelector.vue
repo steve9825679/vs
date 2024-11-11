@@ -54,9 +54,8 @@ export default {
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
       { name: 'Division', label: 'Division', component: Division},
-      {name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100},
+      { name: '100er Feld', label: 'Zahlen Finden im 100er Feld', component: Board100},
       { name: 'CarryOverTen', label: '10er Überschreiten', component: CarryOverTen },
-      { name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100 },
       { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
     ];
 
