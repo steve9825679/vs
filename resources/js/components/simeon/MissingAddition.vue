@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
+// State variables
 const num1 = ref(0);
 const num2 = ref(0);
 const userResult = ref(null);
@@ -9,54 +10,55 @@ const showIncorrect = ref(false);
 const counter = ref(0);
 const possibleAnswers = ref([]);
 
-// Utility function: Generate random integer between `min` and `max` inclusive
+// Utility: Generate random number
 const randomIntFromInterval = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-// Utility function: Shuffle an array
+// Utility: Shuffle an array
 const shuffle = (array) => {
   let currentIndex = array.length;
   while (currentIndex !== 0) {
-    const randomIndex = Math.floor(Math.random() * currentIndex);
+    let randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
     [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
   }
 };
 
-// Function to generate a new calculation
+// Generate new equation
 const makeCalculation = () => {
   counter.value++;
 
-  // Randomly set `num1` and `num2` such that their sum is within the range 2–100
-  num1.value = randomIntFromInterval(1, 99);
-  num2.value = randomIntFromInterval(1, 100 - num1.value);
+  // Generate num1 and total
+  num1.value = randomIntFromInterval(1, 15);
+  const total = randomIntFromInterval(num1.value + 1, num1.value + 15);
 
-  const correctAnswer = num1.value + num2.value;
+  // Calculate num2 (the missing number)
+  num2.value = total - num1.value;
+
+  // Prepare possible answers
+  const correctAnswer = num2.value;
   userResult.value = null;
-
-  // Generate possible answers, ensuring uniqueness
   possibleAnswers.value = [correctAnswer];
-  while (possibleAnswers.value.length < 10) {
-    const randomAnswer = randomIntFromInterval(correctAnswer - 5, correctAnswer + 5);
-    if (!possibleAnswers.value.includes(randomAnswer) && randomAnswer > 0 && randomAnswer <= 100) {
+  while (possibleAnswers.value.length < 6) {
+    const randomAnswer = randomIntFromInterval(1, 30);
+    if (!possibleAnswers.value.includes(randomAnswer)) {
       possibleAnswers.value.push(randomAnswer);
     }
   }
-
   shuffle(possibleAnswers.value);
 };
 
-// Function to check the user's answer
+// Check user's result
 const checkResult = () => {
   const userAnswer = userResult.value;
-  const correctAnswer = num1.value + num2.value;
+  const correctAnswer = num2.value;
 
   if (userAnswer === correctAnswer) {
     showCorrect.value = true;
     setTimeout(() => {
       showCorrect.value = false;
-      makeCalculation(); // Prepare next question
+      makeCalculation();
     }, 2500);
   } else {
     showIncorrect.value = true;
@@ -66,10 +68,9 @@ const checkResult = () => {
   }
 };
 
-// Initialize the game
+// Initialize the first equation
 makeCalculation();
 </script>
-
 
 <template>
   <div>
@@ -78,8 +79,8 @@ makeCalculation();
       <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-4">
         <div class="grid place-items-center h-full">
           <div v-if="showCorrect || showIncorrect" class="text-2xl">Moooooment...</div>
-          <div v-else class="text-7xl text-center whitespace-nowrap overflow-hidden">
-            {{ num1 }} + {{ num2 }} = ?
+          <div v-else class="text-5xl text-center whitespace-nowrap overflow-hidden">
+            {{ num1 }} + _ = {{ num1 + num2 }}
           </div>
         </div>
       </div>
