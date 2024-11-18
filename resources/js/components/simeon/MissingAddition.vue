@@ -9,38 +9,37 @@ const showIncorrect = ref(false);
 const counter = ref(0);
 const possibleAnswers = ref([]);
 
+// Utility function: Generate random integer between `min` and `max` inclusive
 const randomIntFromInterval = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+// Utility function: Shuffle an array
 const shuffle = (array) => {
   let currentIndex = array.length;
-  while (currentIndex != 0) {
-    let randomIndex = Math.floor(Math.random() * currentIndex);
+  while (currentIndex !== 0) {
+    const randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
     [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
   }
 };
 
+// Function to generate a new calculation
 const makeCalculation = () => {
   counter.value++;
 
-  // Generate `num1` as a random number within the current range
-  do {
-    num1.value = randomIntFromInterval(1, 100);
-  } while (num1.value % 10 === 0);
-
-  // Calculate `num2` so that the sum is 22
-  num2.value = 100 - num1.value;
+  // Randomly set `num1` and `num2` such that their sum is within the range 2–100
+  num1.value = randomIntFromInterval(1, 99);
+  num2.value = randomIntFromInterval(1, 100 - num1.value);
 
   const correctAnswer = num1.value + num2.value;
   userResult.value = null;
 
-  // Generate possible answers including correct and incorrect options
+  // Generate possible answers, ensuring uniqueness
   possibleAnswers.value = [correctAnswer];
   while (possibleAnswers.value.length < 10) {
-    const randomAnswer = correctAnswer + randomIntFromInterval(-5, 5);
-    if (!possibleAnswers.value.includes(randomAnswer) && randomAnswer >= 2 && randomAnswer <= 100) {
+    const randomAnswer = randomIntFromInterval(correctAnswer - 5, correctAnswer + 5);
+    if (!possibleAnswers.value.includes(randomAnswer) && randomAnswer > 0 && randomAnswer <= 100) {
       possibleAnswers.value.push(randomAnswer);
     }
   }
@@ -48,16 +47,16 @@ const makeCalculation = () => {
   shuffle(possibleAnswers.value);
 };
 
+// Function to check the user's answer
 const checkResult = () => {
   const userAnswer = userResult.value;
-  const correctAnswer = 22 - num1.value;
+  const correctAnswer = num1.value + num2.value;
 
   if (userAnswer === correctAnswer) {
-    num2.value = 0;
     showCorrect.value = true;
     setTimeout(() => {
       showCorrect.value = false;
-      makeCalculation();
+      makeCalculation(); // Prepare next question
     }, 2500);
   } else {
     showIncorrect.value = true;
@@ -67,20 +66,27 @@ const checkResult = () => {
   }
 };
 
+// Initialize the game
 makeCalculation();
 </script>
+
 
 <template>
   <div>
     <div class="flex justify-between">
-      <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-2">
+      <!-- Left Panel: Displaying the Equation -->
+      <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-4">
         <div class="grid place-items-center h-full">
-          <div v-if="num2 === 0" class="text-2xl">Moooooment...</div>
-          <div v-else class="text-8xl">{{ num1 }} + _ = {{ num2 }}</div>  
+          <div v-if="showCorrect || showIncorrect" class="text-2xl">Moooooment...</div>
+          <div v-else class="text-7xl text-center whitespace-nowrap overflow-hidden">
+            {{ num1 }} + {{ num2 }} = ?
+          </div>
         </div>
       </div>
+
+      <!-- Center Panel: Feedback Messages -->
       <div class="h-full grid self-center">
-        <div class="text-2xl text-center">Round {{ counter }}</div>
+        <div class="text-2xl text-center mb-4">Round {{ counter }}</div>
         <div v-show="showCorrect" class="text-4xl bg-green-700 text-white rounded-md py-3 px-8">
           Suuuuuuuuper 👍
         </div>
@@ -88,11 +94,17 @@ makeCalculation();
           Oiiiiiiii 😒
         </div>
       </div>
-      <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-2">
-        <div class="flex flex-wrap place-content-center h-full">
-          <div v-for="answer in possibleAnswers" :key="`answer${answer}`">
+
+      <!-- Right Panel: Possible Answers -->
+      <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-4">
+        <div class="grid grid-cols-3 gap-4 place-content-center h-full">
+          <div
+            v-for="answer in possibleAnswers"
+            :key="`answer${answer}`"
+            class="flex justify-center items-center"
+          >
             <button
-              class="w-16 h-16 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-4xl m-2 p-2 hover:bg-sky-600 transition"
+              class="w-20 h-20 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-4xl hover:bg-sky-600 transition overflow-hidden"
               @click.prevent="userResult = answer; checkResult()"
             >
               {{ answer }}
@@ -102,68 +114,40 @@ makeCalculation();
       </div>
     </div>
   </div>
-</template>   
+</template>
+
 
 <style scoped>
-/* Full-height flexbox container */
-.game-selector-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-  padding: 20px;
-  box-sizing: border-box;
-  font-family: sans-serif;
-  background-color: #f3f4f6; /* Equivalent to bg-gray-100 */
+/* Adjusting Flexbox Container */
+.flex {
+  gap: 1rem; /* Add spacing between sections */
+  flex-wrap: nowrap; /* Prevent wrapping */
 }
 
-/* Top Section: Close button and dropdown */
-.top-section {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
+/* Center Panel Styling */
+.grid {
+  gap: 1.5rem;
 }
 
-.close-button {
-  font-size: 1.5rem;
-  cursor: pointer;
+/* Button Styling */
+button {
+  width: 4.5rem; /* Wider buttons */
+  height: 4.5rem; /* Taller buttons */
+  font-size: 1.75rem; /* Adjust text size */
+  text-align: center; /* Center text */
+  line-height: 1.5rem; /* Prevent text overflow */
 }
 
-/* Dropdown styling */
-.selectbox {
-  padding: 5px;
-  font-size: 16px;
-  width: 18rem;
+.text-overflow {
+  overflow: hidden; /* Prevent text overflow */
+  text-overflow: ellipsis; /* Add ellipsis for large numbers */
 }
 
-/* Bottom Section: Heading and Game Component */
-.bottom-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: auto;
-  width: 100%;
+.overflow-hidden {
+  overflow: hidden; /* Ensure no overflow happens */
 }
 
-/* Heading styling */
-.heading {
-  font-size: 2.5rem;
-  color: #9c27b0; /* pink-800 color */
-  background-color: #ffca28; /* amber-400 color */
-  text-align: center;
-  padding: 20px;
-  margin-bottom: 10px;
-  width: 100%;
-}
-
-/* Game Component styling */
-.game-component {
-  width: 100%;
-  background-color: #ffffff; /* Equivalent to bg-white */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
-  border-radius: 8px;
-  padding: 20px;
-  flex-grow: 1;
+.whitespace-nowrap {
+  white-space: nowrap; /* Prevent breaking into multiple lines */
 }
 </style>
