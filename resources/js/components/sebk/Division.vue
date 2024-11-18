@@ -93,7 +93,7 @@ generateNewTask();
                         Moooooment...
                     </div>
                     <div v-else class="text-8xl">
-                        {{ dividend }} ÷ {{ divisor }} = 
+                        {{ dividend }} : {{ divisor }} = 
                     </div>
                     <!-- Button für die nächste Aufgabe bei richtiger Antwort -->
                     <button 
