@@ -1,41 +1,56 @@
 <template>
-  <div class="math-game">
+  <div>
     <!-- Zahlenraumauswahl -->
-    <div class="range-selector">
-      <div
-        v-for="range in ranges"
-        :key="range"
-        @click="choose_range(range)"
-        :class="['range-option', { active: range === current_range }]"
-      >
-        {{ range }}
+    <div class="flex justify-around my-4 py-4 bg-amber-200">
+      <div v-for="range in ranges" :key="`r${range}`">
+        <a 
+          href="#" 
+          @click.prevent="choose_range(range)"
+          :class="{'text-amber-800 font-bold border-b-4 border-b-amber-800': range === current_range}"
+        >
+          Zahlenraum {{ range }}
+        </a>
       </div>
     </div>
 
-    <!-- Hauptbereich mit Rechnung und Antwortenauswahl -->
-    <div class="main-content">
+    <!-- Hauptbereich -->
+    <div class="flex justify-between">
       <!-- Linke Seite: Rechnung -->
-      <div class="problem-display">
-        <div v-if="solution === null" class="loading-text">Moooooment...</div>
-        <div v-else class="problem-text">{{ m1 }} + ? = {{ m2 }}</div>
+      <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-2">
+        <div class="grid place-items-center h-full">
+          <div class="text-8xl">
+            {{ m1 }} + ? = {{ m2 }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Mittlere Seite: Feedback -->
+      <div class="h-full grid self-center">
+        <div class="text-2xl text-center">
+          Runde {{ counter }}
+        </div>
+        <div class="text-4xl bg-green-700 text-white rounded-md py-3 px-8" v-show="ok">
+          Richtig! 👍
+        </div>
+        <div class="text-4xl bg-red-700 text-white rounded-md py-3 px-8" v-show="nok">
+          Falsch! 😒
+        </div>
       </div>
 
       <!-- Rechte Seite: Antwortauswahl -->
-      <div class="options-container">
-        <button
-          v-for="result in results"
-          :key="result"
-          @click="check_result(result)"
-          class="option-button"
-        >
-          {{ result }}
-        </button>
+      <div class="h-96 w-96 border-amber-300 border-4 rounded-lg p-2">
+        <div class="flex flex-wrap place-content-center h-full">
+          <button 
+            v-for="result in results" 
+            :key="`result${result}`" 
+            class="w-20 h-20 border-2 border-sky-800 bg-sky-400 text-slate-800 rounded-md font-semibold text-4xl m-2 p-2 hover:bg-sky-600 transition"
+            @click.prevent="check_result(result)"
+          >
+            {{ result }}
+          </button>
+        </div>
       </div>
     </div>
-
-    <!-- Feedback -->
-    <div class="feedback correct" v-if="ok">Richtig! 👍</div>
-    <div class="feedback incorrect" v-if="nok">Leider falsch 😒</div>
   </div>
 </template>
 
@@ -46,8 +61,8 @@ let current_range = ref(10); // Start-Zahlenraum
 const ranges = [10, 20, 50, 100]; // Auswahlmöglichkeiten
 
 const choose_range = (range) => {
-    current_range.value = range;
-    make_calculation();
+  current_range.value = range;
+  make_calculation();
 };
 
 let ok = ref(false);
@@ -56,153 +71,208 @@ let m1 = ref(0);
 let m2 = ref(0);
 let solution = ref(null);
 let results = ref([]);
+let counter = ref(0);
 
 const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 const shuffle = (array) => {
-    let currentIndex = array.length;
-    while (currentIndex != 0) {
-        let randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-    }
+  let currentIndex = array.length;
+  while (currentIndex != 0) {
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
 };
 
 const make_calculation = () => {
-    m1.value = randomIntFromInterval(1, current_range.value - 1);
-    solution.value = randomIntFromInterval(1, current_range.value - m1.value);
-    m2.value = m1.value + solution.value;
+  counter.value++;
+  m1.value = randomIntFromInterval(1, current_range.value - 1); // Zufällige Zahl für m1
+  solution.value = randomIntFromInterval(1, current_range.value - m1.value); // Lösung berechnen
+  m2.value = m1.value + solution.value; // m2 basierend auf m1 und Lösung berechnen
 
-    results.value = Array.from({ length: 11 }, () => randomIntFromInterval(1, current_range.value));
-    results.value.push(solution.value);
-    shuffle(results.value);
+  // Lösche alte Antwortmöglichkeiten
+  results.value = [];
+
+  // Generiere zehn unterschiedliche Antwortmöglichkeiten, inklusive der richtigen
+  const uniqueResults = new Set();
+  uniqueResults.add(solution.value); // Füge die richtige Antwort hinzu
+
+  while (uniqueResults.size < 10) {
+    const randomAnswer = randomIntFromInterval(1, current_range.value);
+    uniqueResults.add(randomAnswer); // Füge eine zufällige Antwort hinzu, wenn sie noch nicht existiert
+  }
+
+  results.value = Array.from(uniqueResults); // Konvertiere das Set in ein Array
+  shuffle(results.value); // Mische die Ergebnisse
 };
 
 const check_result = (chosen_result) => {
-    if (chosen_result === solution.value) {
-        ok.value = true;
-        setTimeout(() => {
-            ok.value = false;
-            make_calculation();
-        }, 2000);
-    } else {
-        nok.value = true;
-        setTimeout(() => {
-            nok.value = false;
-        }, 2000);
-    }
+  if (chosen_result === solution.value) {
+    ok.value = true;
+    setTimeout(() => {
+      ok.value = false;
+      make_calculation();
+    }, 2000);
+  } else {
+    nok.value = true;
+    setTimeout(() => {
+      nok.value = false;
+    }, 2000);
+  }
 };
 
 make_calculation();
 </script>
-
 <style scoped>
-/* Hauptcontainer */
-.math-game {
-  font-family: Arial, sans-serif;
-  max-width: 800px;
-  margin: auto;
-  padding: 1rem;
-}
 
 /* Zahlenraumauswahl */
-.range-selector {
+.flex {
   display: flex;
+}
+
+.justify-around {
   justify-content: space-around;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.my-4 {
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.range-option {
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.3s, color 0.3s;
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
-.range-option.active {
-  color: #f59e0b; /* Amber-500 */
-  border-color: #f59e0b;
+.bg-amber-200 {
+  background-color: #fde68a;
 }
 
-.range-option:hover {
-  color: #d97706; /* Amber-700 */
+.text-amber-800 {
+  color: #92400e;
 }
 
-/* Hauptinhalt */
-.main-content {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-/* Linke Seite: Problem-Anzeige */
-.problem-display {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 250px;
-  border: 3px solid #fbbf24; /* Amber-300 */
-  border-radius: 8px;
-  background-color: #fef3c7; /* Amber-100 */
-}
-
-.loading-text {
-  font-size: 1.5rem;
-  color: #374151; /* Slate-700 */
-}
-
-.problem-text {
-  font-size: 2.5rem;
-  color: #374151; /* Slate-700 */
+.font-bold {
   font-weight: bold;
 }
 
-/* Rechte Seite: Antwortauswahl */
-.options-container {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  align-content: center;
-  height: 250px;
-  border: 3px solid #fbbf24; /* Amber-300 */
-  border-radius: 8px;
-  background-color: #f0fdfa; /* Cyan-50 */
-  padding: 1rem;
+.border-b-4 {
+  border-bottom-width: 4px;
 }
 
-.option-button {
-  width: 60px;
-  height: 60px;
+.border-b-amber-800 {
+  border-bottom-color: #92400e;
+}
+
+/* Rechnung, Feedback und Antwortauswahl */
+.h-96 {
+  height: 24rem;
+}
+
+.w-96 {
+  width: 24rem;
+}
+
+.border-amber-300 {
+  border-color: #fcd34d;
+}
+
+.border-4 {
+  border-width: 4px;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.grid {
+  display: grid;
+}
+
+.place-items-center {
+  place-items: center;
+}
+
+.text-8xl {
+  font-size: 4rem;
+}
+
+.text-2xl {
   font-size: 1.5rem;
-  color: #1e293b; /* Slate-800 */
-  background-color: #38bdf8; /* Sky-400 */
-  border: 2px solid #075985; /* Sky-800 */
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
 }
 
-.option-button:hover {
-  background-color: #0284c7; /* Sky-600 */
-  transform: scale(1.1);
+.text-4xl {
+  font-size: 2.25rem;
 }
 
-/* Feedback */
-.feedback {
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  text-align: center;
+.bg-green-700 {
+  background-color: #047857;
 }
 
-.feedback.correct {
-  color: #15803d; /* Green-700 */
+.bg-red-700 {
+  background-color: #b91c1c;
 }
 
-.feedback.incorrect {
-  color: #ef4444; /* Red-500 */
+.text-white {
+  color: #fff;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Antwortauswahl */
+.border-sky-800 {
+  border-color: #075985;
+}
+
+.bg-sky-400 {
+  background-color: #38bdf8;
+}
+
+.text-slate-800 {
+  color: #1e293b;
+}
+
+.hover\:bg-sky-600:hover {
+  background-color: #0284c7;
+}
+
+.transition {
+  transition: all 0.3s ease-in-out;
+}
+
+.w-20 {
+  width: 5rem;
+}
+
+.h-20 {
+  height: 5rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
+.font-semibold {
+  font-weight: 600;
 }
 </style>
