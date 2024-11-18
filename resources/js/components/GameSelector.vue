@@ -36,6 +36,7 @@ import MultipleGame from './krs/MultipleGame.vue';
 import VisualMultipleGame from './krs/VisualMultipleGame.vue';
 import MultiplierSameGame from './krs/MultiplierSameGame.vue';
 import RandomNumber from './ella/RandomNumber.vue';
+import DiceRoller from './ella/DiceRoller.vue';
 
 export default {
   setup() {
@@ -50,6 +51,8 @@ export default {
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
       { name: 'RandomNumber', label: 'Vorgänger und Nachgänger wählen', component: RandomNumber },
+      { name: 'DiceRoller', label: 'Wähle die passende Summe der Augenzahlen!', component: DiceRoller },
+
     ];
 
     const selectedGame = ref(games[0].name);

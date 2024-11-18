@@ -1,9 +1,12 @@
 <template>
+  <div class="text-center">
+    <h1>Suche den Vorgänger und den Nachfolger der angegebenen Zahl!</h1>
+  </div>
+
   <div class="container">
     <div class="number-display">{{ randomNumber }}</div>
     <div class="choices">
       <div class="choice left-choice">
-        <h3>Vorgänger</h3>
         <div class="choice-grid">
           <div
             class="choice-box"
@@ -17,7 +20,6 @@
         </div>
       </div>
       <div class="choice right-choice">
-        <h3>Nachfolger</h3>
         <div class="choice-grid">
           <div
             class="choice-box"
@@ -116,7 +118,6 @@ export default {
   align-items: center;
   margin-top: 50px;
   height: 100vh;
-  justify-content: flex-end; /* An den unteren Bildschirmrand verschieben */
 }
 
 .number-display {
@@ -137,6 +138,7 @@ export default {
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color:aliceblue; 
 }
 
 .choice-grid {
@@ -158,11 +160,11 @@ export default {
 }
 
 .choice-box:hover {
-  background-color: #d970a6;
+  background-color:lightskyblue;
 }
 
 .selected {
-  background-color: #d970a6; /* Hintergrundfarbe für die gewählte Zahl */
+  background-color:lightskyblue; /* Hintergrundfarbe für die gewählte Zahl */
 }
 
 .feedback {
