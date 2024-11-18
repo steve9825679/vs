@@ -36,6 +36,7 @@ import MultipleGame from './krs/MultipleGame.vue';
 import VisualMultipleGame from './krs/VisualMultipleGame.vue';
 import MultiplierSameGame from './krs/MultiplierSameGame.vue';
 import Division from './sebk/Division.vue';
+import SpeedRechnen from './sebk/Speed-Rechnen.vue';
 
 export default {
   setup() {
@@ -50,6 +51,7 @@ export default {
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
       { name: 'Division', label: 'Division', component: Division},
+      { name: 'Speed-Rechnen', label: 'Speed-Rechen', component: SpeedRechnen}
     ];
 
     const selectedGame = ref(games[0].name);
