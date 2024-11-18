@@ -38,6 +38,7 @@ import MultiplierSameGame from './krs/MultiplierSameGame.vue';
 import CarryOverTen from './simeon/CarryOverTen.vue';
 import Board100 from './lucas/Board100.vue';
 import Numberline from './krs/Numberline.vue';
+import MissingAddition from './simeon/MissingAddition.vue';
 
 export default {
   setup() {
@@ -54,6 +55,7 @@ export default {
       { name: 'CarryOverTen', label: '10er Überschreiten', component: CarryOverTen },
       { name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100 },
       { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
+      { name: 'MissingAdditon', label: 'Fehlende Addition', component: MissingAddition },
     ];
 
     const selectedGame = ref(games[0].name);
