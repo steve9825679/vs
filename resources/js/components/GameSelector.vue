@@ -37,6 +37,13 @@ import VisualMultipleGame from './krs/VisualMultipleGame.vue';
 import MultiplierSameGame from './krs/MultiplierSameGame.vue';
 import RandomNumber from './ella/RandomNumber.vue';
 import DiceRoller from './ella/DiceRoller.vue';
+import Division from './sebk/Division.vue';
+import SpeedRechnen from './sebk/Speed-Rechnen.vue';
+import CarryOverTen from './simeon/CarryOverTen.vue';
+import Board100 from './lucas/Board100.vue';
+import Numberline from './krs/Numberline.vue';
+import MissingAddition from './simeon/MissingAddition.vue';
+import KlaPuStri from './krs/KlaPuStri.vue';
 
 export default {
   setup() {
@@ -52,7 +59,13 @@ export default {
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
       { name: 'RandomNumber', label: 'Vorgänger und Nachgänger wählen', component: RandomNumber },
       { name: 'DiceRoller', label: 'Wähle die passende Summe der Augenzahlen!', component: DiceRoller },
-
+      { name: 'Division', label: 'Division', component: Division},
+      { name: 'Speed-Rechnen', label: 'Speed-Rechen', component: SpeedRechnen},
+      {name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100},
+      { name: 'CarryOverTen', label: '10er Überschreiten', component: CarryOverTen },
+      { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
+      { name: 'MissingAdditon', label: 'Fehlende Addition', component: MissingAddition },
+      { name: 'KlaPuStri', label: 'KlaPuStri', component: KlaPuStri },
     ];
 
     const selectedGame = ref(games[0].name);
