@@ -8,6 +8,7 @@ Alpine.start();
 
 
 import { createApp } from 'vue';
+
 import GameSelector from './components/GameSelector.vue';
  
 createApp({})

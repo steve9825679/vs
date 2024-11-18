@@ -1,11 +1,14 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
+import JSConfetti from 'js-confetti';
+const jsConfetti = new JSConfetti();
 
 let randNumber = ref(0);
 let round = ref(1);
 const numbers = ref(Array.from({ length: 100 }, (_, i) => i + 1));
-let feedbackMessage = ref(null);
+let feedbackMessage = ref("Finde die versteckte Nummer!");
 let feedbackColor = ref('');
+const selectedNumbers = ref(new Set());
 
 const randomNumber = (min, max) => {
   randNumber.value = Math.floor(Math.random() * (max - min + 1) + min);
@@ -16,21 +19,32 @@ function generateAddNew() {
 }
 
 function checkNumber(number) {
+  if (selectedNumbers.value.has(number)) return;
+  selectedNumbers.value.add(number);
+
   if (number === randNumber.value) {
-    feedbackMessage.value = "Suuuuuuper 👍";
-    feedbackColor.value = 'bg-green-700';
+    feedbackMessage.value = "Suuuuuuper 👍 gefunden!";
+    feedbackColor.value = 'bg-green-500';
     round.value++;
+    selectedNumbers.value.clear();
+    jsConfetti.addConfetti({
+            confettiColors: [
+                '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
+            ],
+          });
     randomNumber(1, 100);
     setTimeout(() => {
-      feedbackMessage.value = null;
-      feedbackColor.value = null;
+      feedbackMessage.value = '';
+      feedbackColor.value = '';
     }, 2000);
   } else {
-    feedbackMessage.value = "Oiiiiiiii 😒";
-    feedbackColor.value = 'bg-slate-700';
+    feedbackMessage.value = number < randNumber.value 
+    ? "Zu niedrig! Versuch's höher 🔼" 
+    : "Zu hoch! Versuch's niedriger 🔽";
+    feedbackColor.value = 'bg-slate-500';
     setTimeout(() => {
-      feedbackMessage.value = null;
-      feedbackColor.value = null;
+      feedbackMessage.value = '';
+      feedbackColor.value = '';
     }, 2000);
   }
 }
@@ -44,7 +58,7 @@ onMounted(() => {
   <div id="app">
     <div class="header">
       <h1 :class="feedbackColor">{{ feedbackMessage || `Runde ${round}` }}</h1>
-      <h1 class="number">Drücke auf {{ randNumber }};</h1>
+      <h1 class="number">{{randNumber}}</h1>
     </div>
 
     <div class="grid">
@@ -53,8 +67,9 @@ onMounted(() => {
         :key="number"
         @click="checkNumber(number)"
         class="grid-item"
+        :class="{ revealed: selectedNumbers.has(number) }"
       >
-        {{ number }}
+        {{ selectedNumbers.has(number) ? number : "?" }}
       </div>
     </div>
   </div>
@@ -97,6 +112,10 @@ onMounted(() => {
   color: #d97706;
   background-color: #fde68a;
   transition: background-color 0.3s;
+}
+
+.grid-item.revealed {
+  background-color: #fcd34d;
 }
 
 .grid-item:hover {
