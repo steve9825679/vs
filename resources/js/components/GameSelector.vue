@@ -39,6 +39,8 @@ import DivisionIn from './sebf/DivisionIn.vue';
 import DivisionInWithSpare from './sebf/DivisionInWithSpare.vue';
 import PlusWieViel from './sebf/PlusWieViel.vue';
 import MultiplicationStepsOfTen from './sebf/MultiplicationStepsOfTen.vue';
+import Zahlenpyramide from './sebf/Zahlenpyramide.vue';
+import AdvancedZahlenpyramide from './sebf/AdvancedZahlenpyramide.vue';
 
 export default {
   setup() {
@@ -56,6 +58,8 @@ export default {
       { name: 'DivisionInWithSpare', label: 'Wie oft mit Rest', component: DivisionInWithSpare },
       { name: 'PlusWieViel', label: 'Plus wie viel', component: PlusWieViel },
       { name: 'MultiplicationStepsOfTen', label: 'Multiplikation in 10er Schritten', component: MultiplicationStepsOfTen },
+      { name: 'Zahlenpyramide', label: 'Zahlenpyramide (MaxJonasx2Bogie)', component: Zahlenpyramide },
+      { name: 'AdvancedZahlenpyramide', label: 'Schwerere Zahlenpyramide', component: AdvancedZahlenpyramide },
     ];
 
     const selectedGame = ref(games[0].name);
