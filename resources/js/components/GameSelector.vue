@@ -44,6 +44,7 @@ import Board100 from './lucas/Board100.vue';
 import Numberline from './krs/Numberline.vue';
 import MissingAddition from './simeon/MissingAddition.vue';
 import KlaPuStri from './krs/KlaPuStri.vue';
+import FalscheZahlen from './lucas/FalscheZahlen.vue';
 import Figures from './krs/Figuren.vue';
 
 export default {
@@ -67,6 +68,7 @@ export default {
       { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
       { name: 'MissingAdditon', label: 'Fehlende Addition', component: MissingAddition },
       { name: 'KlaPuStri', label: 'KlaPuStri', component: KlaPuStri },
+      {name: 'FalscheZahlen', label: 'Falsche Zahlen', component: FalscheZahlen},
       { name: 'Figures', label: 'Figuren (Leo, Raphael, Ariane)', component: Figures },
     ];
 
