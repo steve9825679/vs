@@ -14,25 +14,25 @@ const _0xeeac8a=_0x1efc;function _0x2bef(){const _0x17b094=['16pLZRgK','2829834B
 const EXERCISE_PROMPT = `Erstelle eine Mathematikaufgabe mit Schwierigkeit 1-10. Gib nur valides JSON in exakt dieser Struktur zurück:
 Schwierigkeit = 1 => {
   "question": "5 Fische treffen eine Gruppe von 3 Fischen. Wie viele Fische sind es insgesamt?",
-  "options": [6, 7, 8, 9],
-  "correct": 8
+  "options": ["6 Fische", "7 Fische", "8 Fische", "9 Fische"],
+  "correct": "8 Fische"
 }
 Schwierigkeit = 10 => {
   "question": "Ein Auto bewegt sich mit einer konstanten Beschleunigung von 3m/s^2, welche Strecke in Metern hat es zurückgelegt, wenn es 30km/h schnell ist?",
-  "options": [11.56, 13.21, 15.98, 2.5],
-  "correct": 11.56
+  "options": ["11.56m", "13.21m", "15.98m", "2.5m"],
+  "correct": "11.56m"
 }
 Anforderungen:
 - Schwierigkeit: {{difficulty}}
-- Die Frage muss eine mathematische Frage passend zur Schwierigkeit sein (es sind Zweitklässler)
+- Die Frage muss eine mathematische Frage passend zur Schwierigkeit sein
 - Genau 4 numerische Antwortmöglichkeiten
-- Eine Option muss die korrekte Antwort sein
+- Eine Option MUSS die korrekte Antwort sein
 - Denk dir die kreativste Frage überhaupt aus
 - Keine Leerzeichen oder Formatierung im JSON`;
 
 const fetchExercise = async () => {
   loading.value = true;
-  console.log('prompt', EXERCISE_PROMPT.replace('{{difficulty}}', difficulty.value))
+  console.log('prompt: ', EXERCISE_PROMPT.replace('{{difficulty}}', difficulty.value))
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -56,7 +56,11 @@ const fetchExercise = async () => {
     }
 
     exercise.value = JSON.parse(data.choices[0].message.content);
+    console.log('answer: ', exercise.value);
     exercise.value.options = exercise.value.options.sort(() => Math.random() - 0.5);
+    if (!exercise.value.options.includes(exercise.value.correct)) {
+      throw new Error('Korrekte Antwort ist bereits in den Optionen enthalten');
+    }
   } catch (error) {
     console.error('Fehler beim Laden der Aufgabe:', error);
     exercise.value = {
@@ -102,7 +106,7 @@ onMounted(fetchExercise);
     </div>
     
     <div v-else class="space-y-8">
-      <div class="text-2xl font-medium">
+      <div class="text-xl font-medium">
         {{ exercise.question }}
       </div>
       
