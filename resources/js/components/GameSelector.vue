@@ -41,7 +41,7 @@ import Board100 from './lucas/Board100.vue';
 import Numberline from './krs/Numberline.vue';
 import MissingAddition from './simeon/MissingAddition.vue';
 import KlaPuStri from './krs/KlaPuStri.vue';
-
+import AdditionGrid from './simeon/AdditionGrid.vue';
 
 export default {
   setup() {
@@ -56,12 +56,12 @@ export default {
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
       { name: 'Division', label: 'Division', component: Division},
-      { name: '100er Feld', label: 'Zahlen Finden im 100er Feld', component: Board100},
+      {name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100},
       { name: 'CarryOverTen', label: '10er Überschreiten', component: CarryOverTen },
       { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
       { name: 'MissingAdditon', label: 'Fehlende Addition', component: MissingAddition },
       { name: 'KlaPuStri', label: 'KlaPuStri', component: KlaPuStri },
-
+      { name: 'AdditionGrid', label: 'Additions Raster', component: AdditionGrid },
     ];
 
     const selectedGame = ref(games[0].name);
