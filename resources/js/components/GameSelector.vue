@@ -58,7 +58,7 @@ export default {
       { name: 'DivisionInWithSpare', label: 'Wie oft mit Rest', component: DivisionInWithSpare },
       { name: 'PlusWieViel', label: 'Plus wie viel', component: PlusWieViel },
       { name: 'MultiplicationStepsOfTen', label: 'Multiplikation in 10er Schritten', component: MultiplicationStepsOfTen },
-      { name: 'Zahlenpyramide', label: 'Zahlenpyramide (MaxJonasx2Bogie)', component: Zahlenpyramide },
+      { name: 'Zahlenpyramide', label: 'Zahlenpyramide (Max, Jonas, Jonas, Bogie)', component: Zahlenpyramide },
       { name: 'AdvancedZahlenpyramide', label: 'Schwerere Zahlenpyramide', component: AdvancedZahlenpyramide },
     ];
 
