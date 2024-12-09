@@ -35,13 +35,25 @@ import MathChallengeSquare from './krs/MathChallengeSquare.vue';
 import MultipleGame from './krs/MultipleGame.vue';
 import VisualMultipleGame from './krs/VisualMultipleGame.vue';
 import MultiplierSameGame from './krs/MultiplierSameGame.vue';
+import DivisionIn from './sebf/DivisionIn.vue';
+import DivisionInWithSpare from './sebf/DivisionInWithSpare.vue';
+import PlusWieViel from './sebf/PlusWieViel.vue';
+import MultiplicationStepsOfTen from './sebf/MultiplicationStepsOfTen.vue';
+import Zahlenpyramide from './sebf/Zahlenpyramide.vue';
+import AdvancedZahlenpyramide from './sebf/AdvancedZahlenpyramide.vue';
+import RandomNumber from './ella/RandomNumber.vue';
+import DiceRoller from './ella/DiceRoller.vue';
 import Division from './sebk/Division.vue';
+import SpeedRechnen from './sebk/Speed-Rechnen.vue';
 import CarryOverTen from './simeon/CarryOverTen.vue';
 import Board100 from './lucas/Board100.vue';
 import Numberline from './krs/Numberline.vue';
 import MissingAddition from './simeon/MissingAddition.vue';
 import KlaPuStri from './krs/KlaPuStri.vue';
 import AdditionGrid from './simeon/AdditionGrid.vue';
+import FalscheZahlen from './lucas/FalscheZahlen.vue';
+import Figures from './krs/Figuren.vue';
+
 
 export default {
   setup() {
@@ -55,13 +67,24 @@ export default {
       { name: 'MultipleGame', label: 'Reihen mit Fehler', component: MultipleGame },
       { name: 'VisualMultipleGame', label: 'Visuelles Multiplizieren', component: VisualMultipleGame },
       { name: 'MultiplierSameGame', label: 'Gleiche Multiplikationen finden', component: MultiplierSameGame },
+      { name: 'DivisionIn', label: 'Wie oft geht in', component: DivisionIn },
+      { name: 'DivisionInWithSpare', label: 'Wie oft mit Rest', component: DivisionInWithSpare },
+      { name: 'PlusWieViel', label: 'Plus wie viel', component: PlusWieViel },
+      { name: 'MultiplicationStepsOfTen', label: 'Multiplikation in 10er Schritten', component: MultiplicationStepsOfTen },
+      { name: 'Zahlenpyramide', label: 'Zahlenpyramide (Max, Jonas, Jonas, Bogie)', component: Zahlenpyramide },
+      { name: 'AdvancedZahlenpyramide', label: 'Schwerere Zahlenpyramide', component: AdvancedZahlenpyramide },
+      { name: 'RandomNumber', label: 'Vorgänger und Nachgänger wählen', component: RandomNumber },
+      { name: 'DiceRoller', label: 'Wähle die passende Summe der Augenzahlen!', component: DiceRoller },
       { name: 'Division', label: 'Division', component: Division},
-      {name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100},
+      { name: 'Speed-Rechnen', label: 'Speed-Rechen', component: SpeedRechnen},
+      { name: '100er Feld', label: 'Finde Zahlen im 100er Feld', component: Board100},
       { name: 'CarryOverTen', label: '10er Überschreiten', component: CarryOverTen },
       { name: 'NumberlineGame', label: 'Raten auf dem Zahlenstrahl', component: Numberline },
       { name: 'MissingAdditon', label: 'Fehlende Addition', component: MissingAddition },
       { name: 'KlaPuStri', label: 'KlaPuStri', component: KlaPuStri },
       { name: 'AdditionGrid', label: 'Additions Raster', component: AdditionGrid },
+      { name: 'FalscheZahlen', label: 'Falsche Zahlen', component: FalscheZahlen},
+      { name: 'Figures', label: 'Figuren (Leo, Raphael, Ariane)', component: Figures },
     ];
 
     const selectedGame = ref(games[0].name);
