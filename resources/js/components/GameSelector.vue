@@ -44,8 +44,8 @@ import Board100 from './lucas/Board100.vue';
 import Numberline from './krs/Numberline.vue';
 import MissingAddition from './simeon/MissingAddition.vue';
 import KlaPuStri from './krs/KlaPuStri.vue';
-import WrongNumbers from './lucas/WrongNumbers.vue';
 import FalscheZahlen from './lucas/FalscheZahlen.vue';
+import Figures from './krs/Figuren.vue';
 
 export default {
   setup() {
@@ -69,6 +69,7 @@ export default {
       { name: 'MissingAdditon', label: 'Fehlende Addition', component: MissingAddition },
       { name: 'KlaPuStri', label: 'KlaPuStri', component: KlaPuStri },
       {name: 'FalscheZahlen', label: 'Falsche Zahlen', component: FalscheZahlen},
+      { name: 'Figures', label: 'Figuren (Leo, Raphael, Ariane)', component: Figures },
     ];
 
     const selectedGame = ref(games[0].name);
