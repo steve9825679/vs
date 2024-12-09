@@ -84,7 +84,7 @@
   
   export default {
     setup() {
-      const selectedRow = ref(1);
+      const selectedRow = ref(2);
       const task = ref({ divisor: 0, dividend: 0, solution: 0, remainder: 0 });
       const ok = ref(false);
       const nok = ref(false);
