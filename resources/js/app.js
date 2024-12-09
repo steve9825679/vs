@@ -1,17 +1,10 @@
 import './bootstrap';
-
 import Alpine from 'alpinejs';
-
 import { createApp } from 'vue';
 import GameSelector from './components/GameSelector.vue';
 
 window.Alpine = Alpine;
-
 Alpine.start();
-
-import { createApp } from 'vue';
-
-import GameSelector from './components/GameSelector.vue';
  
 createApp({})
   .component('game-selector', GameSelector)

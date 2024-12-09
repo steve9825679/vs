@@ -53,6 +53,7 @@ import KlaPuStri from './krs/KlaPuStri.vue';
 import FalscheZahlen from './lucas/FalscheZahlen.vue';
 import Figures from './krs/Figuren.vue';
 
+import TextBeispiel from './enio/TextBeispiel.vue';
 
 export default {
   setup() {
@@ -83,6 +84,7 @@ export default {
       { name: 'KlaPuStri', label: 'KlaPuStri', component: KlaPuStri },
       { name: 'FalscheZahlen', label: 'Falsche Zahlen', component: FalscheZahlen},
       { name: 'Figures', label: 'Figuren (Leo, Raphael, Ariane)', component: Figures },
+      { name: 'Textbeispiele', label: 'Textbeispiele', component: TextBeispiel },
     ];
 
     const selectedGame = ref(games[0].name);
