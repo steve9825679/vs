@@ -59,7 +59,7 @@ const fetchExercise = async () => {
     console.log('answer: ', exercise.value);
     exercise.value.options = exercise.value.options.sort(() => Math.random() - 0.5);
     if (!exercise.value.options.includes(exercise.value.correct)) {
-      throw new Error('Korrekte Antwort ist bereits in den Optionen enthalten');
+      throw new Error('Korrekte Antwort ist nicht in den Optionen enthalten');
     }
   } catch (error) {
     console.error('Fehler beim Laden der Aufgabe:', error);
