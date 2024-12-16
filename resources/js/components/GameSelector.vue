@@ -54,6 +54,7 @@ import AdditionGrid from './simeon/AdditionGrid.vue';
 import FalscheZahlen from './lucas/FalscheZahlen.vue';
 import Figures from './krs/Figuren.vue';
 
+import TextBeispiel from './enio/TextBeispiel.vue';
 
 export default {
   setup() {
@@ -85,6 +86,7 @@ export default {
       { name: 'AdditionGrid', label: 'Additions Raster', component: AdditionGrid },
       { name: 'FalscheZahlen', label: 'Falsche Zahlen', component: FalscheZahlen},
       { name: 'Figures', label: 'Figuren (Leo, Raphael, Ariane)', component: Figures },
+      { name: 'Textbeispiele', label: 'Textbeispiele', component: TextBeispiel },
     ];
 
     const selectedGame = ref(games[0].name);
